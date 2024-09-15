@@ -10,6 +10,7 @@ import {
   Typography,
   Result,
   Badge,
+  Image,
 } from 'antd';
 import { Link } from 'react-router-dom';
 import { Movie } from '../types/types';
@@ -22,6 +23,7 @@ import OfflineMessage from '../components/Offline/OfflineMessage';
 import { getDisplayValue } from '../utils/utils';
 import { RootState } from '../store/store';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { ANTD_FALLBACK_IMAGE } from '../constants/constants';
 
 const { Search } = Input;
 const { Meta } = Card;
@@ -148,10 +150,12 @@ const SearchPage = () => {
                   <Card
                     hoverable
                     cover={
-                      <img
-                        alt={movie.Title}
+                      <Image
                         src={movie.Poster}
+                        alt="Logo"
+                        fallback={ANTD_FALLBACK_IMAGE}
                         style={{ height: '300px', objectFit: 'cover' }}
+                        preview={false}
                       />
                     }
                     style={{

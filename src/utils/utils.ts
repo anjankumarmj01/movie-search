@@ -1,6 +1,8 @@
+import { NOT_AVAILABLE, NOT_APPLIED } from '../constants/constants';
+
 export const getDisplayValue = (
   value: string | undefined,
-  defaultValue: string = 'Not Available'
+  defaultValue: string = NOT_AVAILABLE
 ) => {
-  return value && value !== 'N/A' ? value : defaultValue;
+  return value && value !== NOT_APPLIED ? value : defaultValue;
 };

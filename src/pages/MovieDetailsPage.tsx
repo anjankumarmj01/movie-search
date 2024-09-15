@@ -1,10 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useGetMovieDetailsQuery } from '../store/api';
-import { Table, Button, Row, Col, Result } from 'antd';
+import { Table, Button, Row, Col, Result, Image } from 'antd';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import OfflineMessage from '../components/Offline/OfflineMessage';
 import { getDisplayValue } from '../utils/utils';
 import Shimmer from '../components/Shimmer/Shimmer';
+import { ANTD_FALLBACK_IMAGE } from '../constants/constants';
 
 const MovieDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -59,9 +60,10 @@ const MovieDetailsPage = () => {
         <>
           <Row gutter={16}>
             <Col xs={24} sm={12} md={8}>
-              <img
-                alt={data?.Title}
+              <Image
                 src={data?.Poster}
+                alt="Logo"
+                fallback={ANTD_FALLBACK_IMAGE}
                 style={{
                   width: '100%',
                   height: 'auto',
@@ -69,6 +71,7 @@ const MovieDetailsPage = () => {
                   display: 'block',
                   margin: '0 auto',
                 }}
+                preview={false}
               />
             </Col>
             <Col xs={24} sm={12} md={16}>

@@ -8,6 +8,7 @@ import {
   Layout,
   Result,
   Typography,
+  Image,
 } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { Movie } from '../../types/types';
@@ -19,6 +20,7 @@ import { getDisplayValue } from '../../utils/utils';
 import { RootState } from '../../store/store';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import useNavigation from '../../utils/useNavigation';
+import { ANTD_FALLBACK_IMAGE } from '../../constants/constants';
 
 const { Meta } = Card;
 const { Content } = Layout;
@@ -81,13 +83,15 @@ const Favourites: React.FC = () => {
                   <Card
                     hoverable
                     cover={
-                      <img
-                        alt={movie.Title}
+                      <Image
                         src={movie.Poster}
+                        alt="Logo"
+                        fallback={ANTD_FALLBACK_IMAGE}
                         style={{
                           height: '300px',
                           objectFit: 'cover',
                         }}
+                        preview={false}
                       />
                     }
                     style={{
