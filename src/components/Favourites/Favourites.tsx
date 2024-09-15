@@ -60,10 +60,7 @@ const Favourites = () => {
     <Layout style={{ height: '100vh', backgroundColor: 'white' }}>
       <Content style={{ padding: '20px', backgroundColor: 'white' }}>
         {favourites.length > 0 && (
-          <Title
-            level={2}
-            style={{ textAlign: 'center', marginBottom: '20px' }}
-          >
+          <Title level={2} style={{ textAlign: 'left', marginBottom: '20px' }}>
             Favourites
           </Title>
         )}
@@ -73,11 +70,6 @@ const Favourites = () => {
             status="success"
             title="Your favourites will appear here"
             subTitle="No favourites added yet."
-            extra={
-              <Button type="primary" onClick={handleClick}>
-                {BACK_HOME}
-              </Button>
-            }
           />
         ) : (
           <Row gutter={[16, 16]}>
@@ -124,6 +116,21 @@ const Favourites = () => {
             ))}
           </Row>
         )}
+
+        {/* Center-align the Back Home button */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '20px',
+            padding: '20px 0',
+          }}
+        >
+          <Button type="primary" onClick={handleClick}>
+            {BACK_HOME}
+          </Button>
+        </div>
       </Content>
 
       <Modal

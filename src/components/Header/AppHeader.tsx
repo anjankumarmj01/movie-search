@@ -2,15 +2,21 @@ import { Layout, Typography, Image } from 'antd';
 import movieSearchLogo from '../../assets/movieSearch.jpg';
 import useNavigation from '../../utils/useNavigation';
 import { LOGO, MOVIE_SEARCH_TITLE } from '../../constants/constants';
+import { useLocation } from 'react-router-dom';
 
 const { Header } = Layout;
 const { Text } = Typography;
 
 const AppHeader = () => {
   const { handleGoHome } = useNavigation();
+  const location = useLocation();
 
   const handleClick = () => {
-    handleGoHome();
+    if (location.pathname === '/') {
+      window.location.reload();
+    } else {
+      handleGoHome();
+    }
   };
 
   return (
