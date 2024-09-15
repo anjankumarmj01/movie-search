@@ -92,7 +92,10 @@ const SearchPage = () => {
       {isLoading ? (
         <Shimmer count={12} type="search" />
       ) : error ? (
-        <p>Error occurred while fetching movies.</p>
+        <Result
+          status="warning"
+          title="Error occured while fetching movie details"
+        />
       ) : (
         <>
           {searchTerm === '' ? (
