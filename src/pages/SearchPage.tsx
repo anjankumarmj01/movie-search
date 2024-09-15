@@ -1,43 +1,26 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSearchMoviesQuery } from '../store/api';
-import {
-  Input,
-  Card,
-  Row,
-  Col,
-  Button,
-  Modal,
-  Typography,
-  Result,
-  Badge,
-  Image,
-} from 'antd';
-import { Link } from 'react-router-dom';
+import { Input, Button, Badge } from 'antd';
 import { Movie } from '../types/types';
 import useOnlineStatus from '../utils/useOnlineStatus';
-import Shimmer from '../components/Shimmer/Shimmer';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavourite } from '../store/favourite/favouritesSlice';
 import { setSearchResults, setSearchTerm } from '../store/search/searchSlice';
 import OfflineMessage from '../components/Offline/OfflineMessage';
-import { getDisplayValue } from '../utils/utils';
 import { AppDispatch, RootState } from '../store/store';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { ANTD_FALLBACK_IMAGE, LOGO } from '../constants/constants';
+import MovieSearchResultsPage from './MovieSearchResultsPage'; // Import the child component
+import { Link } from 'react-router-dom';
 
 const { Search } = Input;
-const { Meta } = Card;
-const { Text } = Typography;
 
 const SearchPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [addedMovieTitle, setAddedMovieTitle] = useState('');
-  const [showError, setShowError] = useState(false); // state for managing error display
+  const [showError, setShowError] = useState(false); // State for managing error display
   const dispatch = useDispatch<AppDispatch>();
 
   // Selectors
   const searchTerm = useSelector((state: RootState) => state.search.searchTerm);
-  const searchResults = useSelector((state: RootState) => state.search.results);
   const favourites = useSelector(
     (state: RootState) => state.favourites.favourites
   );
@@ -55,11 +38,7 @@ const SearchPage = () => {
         dispatch(setSearchResults(data));
       } else {
         dispatch(
-          setSearchResults({
-            Search: [],
-            totalResults: '0',
-            Response: 'False',
-          })
+          setSearchResults({ Search: [], totalResults: '0', Response: 'False' })
         );
       }
     }
@@ -121,90 +100,18 @@ const SearchPage = () => {
           />
         )}
       </div>
-      {isLoading && <Shimmer count={12} type="search" />}
-      {error && (
-        <Result
-          status="warning"
-          title="Error occurred while fetching movie details"
-        />
-      )}
-      {searchTerm === '' && searchResults?.length === 0 && (
-        <Result
-          status="success"
-          title="Your searched movies appear here"
-          subTitle="Please start searching"
-        />
-      )}
-      {searchTerm && searchTerm?.length >= 3 && searchResults?.length === 0 && (
-        <Result
-          title={`No movies found matching "${searchTerm}".`}
-          subTitle="Please try a different title."
-        />
-      )}
-      {searchTerm && searchTerm?.length >= 3 && searchResults?.length > 0 && (
-        <Row gutter={[16, 16]}>
-          {searchResults?.map((movie: Movie) => (
-            <Col key={movie.imdbID} xs={24} sm={12} md={8} lg={4}>
-              <Link to={`/movie/${movie.imdbID}`}>
-                <div style={{ width: '200px', height: '400px' }}>
-                  <Card
-                    hoverable
-                    cover={
-                      <Image
-                        src={movie.Poster}
-                        alt={LOGO}
-                        fallback={ANTD_FALLBACK_IMAGE}
-                        style={{ height: '300px', objectFit: 'cover' }}
-                        preview={false}
-                      />
-                    }
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <Meta
-                      title={getDisplayValue(movie?.Title)}
-                      description={getDisplayValue(movie?.Year?.split('–')[0])}
-                    />
-                  </Card>
-                </div>
-              </Link>
-              <Button
-                type="primary"
-                style={{ marginTop: 10, width: '200px' }}
-                onClick={() => handleAddToFavourites(movie)}
-                disabled={favouriteIds.includes(movie.imdbID)}
-              >
-                {favouriteIds.includes(movie.imdbID)
-                  ? 'Already in Favourites'
-                  : 'Add to Favourites'}
-              </Button>
-            </Col>
-          ))}
-        </Row>
-      )}
-
-      <Modal
-        title={
-          <span>
-            <ExclamationCircleOutlined /> Added to Favourites
-          </span>
-        }
-        open={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleOk}
-        centered
-        width={400}
-        footer={[
-          <Button key="ok" type="primary" onClick={handleOk}>
-            OK
-          </Button>,
-        ]}
-      >
-        <Text strong>{addedMovieTitle}</Text> has been added to your favourites!
-      </Modal>
+      {/* Pass necessary props to the child component */}
+      <MovieSearchResultsPage
+        isLoading={isLoading}
+        error={error}
+        searchTerm={searchTerm}
+        searchResults={data?.Search || []}
+        favouriteIds={favouriteIds}
+        handleAddToFavourites={handleAddToFavourites}
+        isModalVisible={isModalVisible}
+        addedMovieTitle={addedMovieTitle}
+        handleOk={handleOk}
+      />
     </div>
   );
 };
