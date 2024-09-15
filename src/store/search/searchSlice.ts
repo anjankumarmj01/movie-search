@@ -18,15 +18,11 @@ const searchSlice = createSlice({
     setSearchResults: (state, action: PayloadAction<SearchResults>) => {
       state.results = action.payload.Search; // Set the search results
     },
-    clearSearchResults: (state) => {
-      state.results = []; // Clear the search results
-    },
     setSearchTerm(state, action: PayloadAction<string>) {
       state.searchTerm = action.payload;
     },
   },
 });
 
-export const { setSearchResults, clearSearchResults, setSearchTerm } =
-  searchSlice.actions;
+export const { setSearchResults, setSearchTerm } = searchSlice.actions;
 export default searchSlice.reducer;

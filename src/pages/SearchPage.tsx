@@ -21,9 +21,9 @@ import { addFavourite } from '../store/favourite/favouritesSlice';
 import { setSearchResults, setSearchTerm } from '../store/search/searchSlice';
 import OfflineMessage from '../components/Offline/OfflineMessage';
 import { getDisplayValue } from '../utils/utils';
-import { RootState } from '../store/store';
+import { AppDispatch, RootState } from '../store/store';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { ANTD_FALLBACK_IMAGE } from '../constants/constants';
+import { ANTD_FALLBACK_IMAGE, LOGO } from '../constants/constants';
 
 const { Search } = Input;
 const { Meta } = Card;
@@ -33,7 +33,7 @@ const SearchPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [addedMovieTitle, setAddedMovieTitle] = useState('');
   const [showError, setShowError] = useState(false); // state for managing error display
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   // Selectors
   const searchTerm = useSelector((state: RootState) => state.search.searchTerm);
@@ -152,7 +152,7 @@ const SearchPage = () => {
                     cover={
                       <Image
                         src={movie.Poster}
-                        alt="Logo"
+                        alt={LOGO}
                         fallback={ANTD_FALLBACK_IMAGE}
                         style={{ height: '300px', objectFit: 'cover' }}
                         preview={false}

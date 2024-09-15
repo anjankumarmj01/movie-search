@@ -1,6 +1,7 @@
 import { Layout, Typography, Image } from 'antd';
 import movieSearchLogo from '../../assets/movieSearch.jpg';
 import useNavigation from '../../utils/useNavigation';
+import { LOGO, MOVIE_SEARCH_TITLE } from '../../constants/constants';
 
 const { Header } = Layout;
 const { Text } = Typography;
@@ -17,11 +18,11 @@ const AppHeader = () => {
       <div style={logoContainerStyle} onClick={handleClick}>
         <Image
           src={movieSearchLogo}
-          alt="Logo"
+          alt={LOGO}
           style={logoStyle}
           preview={false}
         />
-        <Text style={movieSearchTextStyle}>Movie Search</Text>
+        <Text style={movieSearchTextStyle}>{MOVIE_SEARCH_TITLE}</Text>
       </div>
     </Header>
   );

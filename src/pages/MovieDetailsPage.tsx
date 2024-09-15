@@ -5,7 +5,7 @@ import useOnlineStatus from '../utils/useOnlineStatus';
 import OfflineMessage from '../components/Offline/OfflineMessage';
 import { getDisplayValue } from '../utils/utils';
 import Shimmer from '../components/Shimmer/Shimmer';
-import { ANTD_FALLBACK_IMAGE } from '../constants/constants';
+import { ANTD_FALLBACK_IMAGE, GO_BACK, LOGO } from '../constants/constants';
 
 const MovieDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -62,7 +62,7 @@ const MovieDetailsPage = () => {
             <Col xs={24} sm={12} md={8}>
               <Image
                 src={data?.Poster}
-                alt="Logo"
+                alt={LOGO}
                 fallback={ANTD_FALLBACK_IMAGE}
                 style={{
                   width: '100%',
@@ -93,7 +93,7 @@ const MovieDetailsPage = () => {
               justifyContent: 'center',
             }}
           >
-            <Button onClick={() => window.history.back()}>Go Back</Button>
+            <Button onClick={() => window.history.back()}>{GO_BACK}</Button>
           </div>
         </>
       )}

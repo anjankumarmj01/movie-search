@@ -1,5 +1,6 @@
 import { Result, Button } from 'antd';
 import { WifiOutlined } from '@ant-design/icons';
+import { RETRY } from '../../constants/constants';
 
 const OfflineMessage = () => (
   <Result
@@ -8,7 +9,7 @@ const OfflineMessage = () => (
     subTitle="It seems like you are offline. Please check your internet connection and try again."
     extra={
       <Button type="primary" onClick={() => window.location.reload()}>
-        Retry
+        {RETRY}
       </Button>
     }
   />

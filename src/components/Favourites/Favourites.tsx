@@ -17,22 +17,26 @@ import { removeFavourite } from '../../store/favourite/favouritesSlice';
 import useOnlineStatus from '../../utils/useOnlineStatus';
 import OfflineMessage from '../Offline/OfflineMessage';
 import { getDisplayValue } from '../../utils/utils';
-import { RootState } from '../../store/store';
+import { AppDispatch, RootState } from '../../store/store';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import useNavigation from '../../utils/useNavigation';
-import { ANTD_FALLBACK_IMAGE } from '../../constants/constants';
+import {
+  ANTD_FALLBACK_IMAGE,
+  BACK_HOME,
+  LOGO,
+} from '../../constants/constants';
 
 const { Meta } = Card;
 const { Content } = Layout;
 const { Title, Text } = Typography;
 
-const Favourites: React.FC = () => {
+const Favourites = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [removedMovieTitle, setRemovedMovieTitle] = useState<string>('');
   const favourites = useSelector(
     (state: RootState) => state.favourites.favourites
   );
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const onlineStatus = useOnlineStatus();
   const { handleGoHome } = useNavigation();
 
@@ -71,7 +75,7 @@ const Favourites: React.FC = () => {
             subTitle="No favourites added yet."
             extra={
               <Button type="primary" onClick={handleClick}>
-                Back Home
+                {BACK_HOME}
               </Button>
             }
           />
@@ -85,7 +89,7 @@ const Favourites: React.FC = () => {
                     cover={
                       <Image
                         src={movie.Poster}
-                        alt="Logo"
+                        alt={LOGO}
                         fallback={ANTD_FALLBACK_IMAGE}
                         style={{
                           height: '300px',
