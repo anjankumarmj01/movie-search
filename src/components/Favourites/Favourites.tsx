@@ -135,9 +135,9 @@ const Favourites = () => {
 
       <Modal
         title={
-          <span>
+          <Text>
             <ExclamationCircleOutlined /> Removed from Favourites
-          </span>
+          </Text>
         }
         open={isModalVisible}
         onOk={handleOk}

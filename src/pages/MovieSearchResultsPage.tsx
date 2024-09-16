@@ -124,9 +124,9 @@ const MovieSearchResults: React.FC<MovieSearchResultsProps> = ({
   const renderModal = () => (
     <Modal
       title={
-        <span>
+        <Text>
           <ExclamationCircleOutlined /> Added to Favourites
-        </span>
+        </Text>
       }
       open={isModalVisible}
       onOk={handleOk}
