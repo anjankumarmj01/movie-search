@@ -3,9 +3,9 @@ import { Row, Col, Button, Modal, Result, Card, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 import { Movie } from '../types/types';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { getDisplayValue } from '../utils/utils';
+import { getDisplayValue, handleRetry } from '../utils/utils';
 import { Image } from 'antd';
-import { ANTD_FALLBACK_IMAGE, LOGO } from '../constants/constants';
+import { ANTD_FALLBACK_IMAGE, LOGO, REFRESH } from '../constants/constants';
 import Shimmer from '../components/Shimmer/Shimmer';
 
 const { Meta } = Card;
@@ -39,10 +39,22 @@ const MovieSearchResults: React.FC<MovieSearchResultsProps> = ({
 
   // Render error state
   const renderError = () => (
-    <Result
-      status="warning"
-      title="Error occurred while fetching movie details"
-    />
+    <div style={{ textAlign: 'center', marginTop: '20px' }}>
+      <Result
+        status="warning"
+        title="Error occurred while fetching movies"
+        subTitle="It seems there was a problem connecting to the server."
+        extra={
+          <Button
+            type="primary"
+            onClick={handleRetry}
+            style={{ margin: '10px' }}
+          >
+            {REFRESH}
+          </Button>
+        }
+      />
+    </div>
   );
 
   // Render empty search prompt
@@ -134,19 +146,18 @@ const MovieSearchResults: React.FC<MovieSearchResultsProps> = ({
   // Main render logic
   return (
     <>
-      {isLoading && renderLoading()}
-      {error && renderError()}
-      {searchTerm === '' &&
-        searchResults.length === 0 &&
-        renderEmptySearchPrompt()}
-      {searchTerm &&
-        searchTerm.length >= 3 &&
-        searchResults.length === 0 &&
-        renderNoResults()}
-      {searchTerm &&
-        searchTerm.length >= 3 &&
-        searchResults.length > 0 &&
-        renderSearchResults()}
+      {isLoading
+        ? renderLoading()
+        : error
+          ? renderError()
+          : searchTerm === '' && searchResults.length === 0
+            ? renderEmptySearchPrompt()
+            : searchTerm.length >= 3 && searchResults.length === 0
+              ? renderNoResults()
+              : searchTerm.length >= 3 && searchResults.length > 0
+                ? renderSearchResults()
+                : null}
+
       {renderModal()}
     </>
   );
