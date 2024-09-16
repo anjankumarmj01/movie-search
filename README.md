@@ -28,6 +28,9 @@ npm start
 Open your browser and navigate to your localhost server the project is running on
 Example: http://localhost:5173
 
+Application Video:
+https://www.loom.com/share/105fb364550a4d1982c9b4e3d171c14b?sid=35b9e201-4565-4be2-9748-86ae3f3bb422
+
 - **Usage**:
   - Use the search bar on the Search page to find movies by title. (Min 3 character is expected as api gives no results for title <3 characters)
   - Click on a movie to view its details.
