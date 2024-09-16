@@ -54,6 +54,58 @@ const Favourites = () => {
     handleGoHome();
   };
 
+  const renderFavourites = () => (
+    <Row gutter={[16, 16]}>
+      {favourites.map((movie: Movie) => (
+        <Col key={movie.imdbID} xs={24} sm={12} md={8} lg={4}>
+          <Link to={`/movie/${movie.imdbID}`}>
+            <Card
+              hoverable
+              cover={
+                <Image
+                  src={movie.Poster}
+                  alt={LOGO}
+                  fallback={ANTD_FALLBACK_IMAGE}
+                  style={{
+                    height: '300px',
+                    objectFit: 'cover',
+                  }}
+                  preview={false}
+                />
+              }
+              style={{
+                position: 'relative',
+                width: '200px',
+                height: '400px',
+                overflow: 'hidden',
+              }}
+            >
+              <Meta
+                title={getDisplayValue(movie.Title)}
+                description={getDisplayValue(movie.Year?.split('–')[0])}
+              />
+            </Card>
+          </Link>
+          <Button
+            type="primary"
+            style={{ marginTop: 10, width: '200px' }}
+            onClick={() => handleRemoveFavourite(movie.imdbID, movie.Title)}
+          >
+            Remove from Favourites
+          </Button>
+        </Col>
+      ))}
+    </Row>
+  );
+
+  const renderEmptyFavourites = () => (
+    <Result
+      status="success"
+      title="Your favourites will appear here"
+      subTitle="No favourites added yet."
+    />
+  );
+
   if (!onlineStatus) return <OfflineMessage />;
 
   return (
@@ -65,57 +117,7 @@ const Favourites = () => {
           </Title>
         )}
 
-        {favourites.length === 0 ? (
-          <Result
-            status="success"
-            title="Your favourites will appear here"
-            subTitle="No favourites added yet."
-          />
-        ) : (
-          <Row gutter={[16, 16]}>
-            {favourites.map((movie: Movie) => (
-              <Col key={movie.imdbID} xs={24} sm={12} md={8} lg={4}>
-                <Link to={`/movie/${movie.imdbID}`}>
-                  <Card
-                    hoverable
-                    cover={
-                      <Image
-                        src={movie.Poster}
-                        alt={LOGO}
-                        fallback={ANTD_FALLBACK_IMAGE}
-                        style={{
-                          height: '300px',
-                          objectFit: 'cover',
-                        }}
-                        preview={false}
-                      />
-                    }
-                    style={{
-                      position: 'relative',
-                      width: '200px',
-                      height: '400px',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <Meta
-                      title={getDisplayValue(movie.Title)}
-                      description={getDisplayValue(movie.Year?.split('–')[0])}
-                    />
-                  </Card>
-                </Link>
-                <Button
-                  type="primary"
-                  style={{ marginTop: 10, width: '200px' }}
-                  onClick={() =>
-                    handleRemoveFavourite(movie.imdbID, movie.Title)
-                  }
-                >
-                  Remove from Favourites
-                </Button>
-              </Col>
-            ))}
-          </Row>
-        )}
+        {favourites.length === 0 ? renderEmptyFavourites() : renderFavourites()}
 
         {/* Center-align the Back Home button */}
         <div
