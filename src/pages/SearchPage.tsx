@@ -18,6 +18,7 @@ const SearchPage = () => {
   const [addedMovieTitle, setAddedMovieTitle] = useState('');
   const [showError, setShowError] = useState(false); // State for managing error display
   const dispatch = useDispatch<AppDispatch>();
+  const onlineStatus = useOnlineStatus();
 
   // Selectors
   const searchTerm = useSelector((state: RootState) => state.search.searchTerm);
@@ -70,7 +71,6 @@ const SearchPage = () => {
     setIsModalVisible(false);
   };
 
-  const onlineStatus = useOnlineStatus();
   if (!onlineStatus) return <OfflineMessage />;
 
   return (

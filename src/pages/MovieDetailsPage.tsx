@@ -3,7 +3,7 @@ import { useGetMovieDetailsQuery } from '../store/api';
 import { Table, Button, Row, Col, Result, Image } from 'antd';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import OfflineMessage from '../components/Offline/OfflineMessage';
-import { getDisplayValue } from '../utils/utils';
+import { getDisplayValue, handleGoBack } from '../utils/utils';
 import Shimmer from '../components/Shimmer/Shimmer';
 import { ANTD_FALLBACK_IMAGE, GO_BACK, LOGO } from '../constants/constants';
 
@@ -93,7 +93,7 @@ const MovieDetailsPage = () => {
               justifyContent: 'center',
             }}
           >
-            <Button onClick={() => window.history.back()}>{GO_BACK}</Button>
+            <Button onClick={handleGoBack}>{GO_BACK}</Button>
           </div>
         </>
       )}

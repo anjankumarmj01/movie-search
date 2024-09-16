@@ -6,3 +6,11 @@ export const getDisplayValue = (
 ) => {
   return value && value !== NOT_APPLIED ? value : defaultValue;
 };
+
+export const handleRetry = (): void => {
+  window.location.reload();
+};
+
+export const handleGoBack = (): void => {
+  window.history.back();
+};

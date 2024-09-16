@@ -3,6 +3,7 @@ import movieSearchLogo from '../../assets/movieSearch.jpg';
 import useNavigation from '../../utils/useNavigation';
 import { LOGO, MOVIE_SEARCH_TITLE } from '../../constants/constants';
 import { useLocation } from 'react-router-dom';
+import { handleRetry } from '../../utils/utils';
 
 const { Header } = Layout;
 const { Text } = Typography;
@@ -13,7 +14,7 @@ const AppHeader = () => {
 
   const handleClick = () => {
     if (location.pathname === '/') {
-      window.location.reload();
+      handleRetry();
     } else {
       handleGoHome();
     }
