@@ -5,12 +5,19 @@ import useOnlineStatus from '../utils/useOnlineStatus';
 import OfflineMessage from '../components/Offline/OfflineMessage';
 import { getDisplayValue, handleGoBack } from '../utils/utils';
 import Shimmer from '../components/Shimmer/Shimmer';
-import { ANTD_FALLBACK_IMAGE, GO_BACK, LOGO } from '../constants/constants';
+import {
+  ANTD_FALLBACK_IMAGE,
+  BACK_HOME,
+  GO_BACK,
+  LOGO,
+} from '../constants/constants';
+import useNavigation from '../utils/useNavigation';
 
 const MovieDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading, error } = useGetMovieDetailsQuery(id!);
   const onlineStatus = useOnlineStatus();
+  const { handleGoHome } = useNavigation();
 
   const columns = [
     {
@@ -93,6 +100,13 @@ const MovieDetailsPage = () => {
               justifyContent: 'center',
             }}
           >
+            <Button
+              type="primary"
+              onClick={handleGoHome}
+              style={{ marginRight: '10px' }}
+            >
+              {BACK_HOME}
+            </Button>
             <Button onClick={handleGoBack}>{GO_BACK}</Button>
           </div>
         </>
