@@ -5,7 +5,7 @@ import { Movie } from '../types/types';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { getDisplayValue, handleRetry } from '../utils/utils';
 import { Image } from 'antd';
-import { ANTD_FALLBACK_IMAGE, LOGO, REFRESH } from '../constants/constants';
+import { ANTD_FALLBACK_IMAGE, LOGO, RETRY } from '../constants/constants';
 import Shimmer from '../components/Shimmer/Shimmer';
 
 const { Meta } = Card;
@@ -50,7 +50,7 @@ const MovieSearchResults: React.FC<MovieSearchResultsProps> = ({
             onClick={handleRetry}
             style={{ margin: '10px' }}
           >
-            {REFRESH}
+            {RETRY}
           </Button>
         }
       />

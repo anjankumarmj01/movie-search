@@ -4,7 +4,6 @@ export const NOT_APPLIED = 'N/A';
 export const BACK_HOME = 'Back Home';
 export const GO_BACK = 'Go Back';
 export const RETRY = 'Retry';
-export const REFRESH = 'Refresh';
 
 export const MOVIE_SEARCH_TITLE = 'Movie Search';
 

@@ -14,3 +14,7 @@ export const handleRetry = (): void => {
 export const handleGoBack = (): void => {
   window.history.back();
 };
+
+export const handleRefreshApp = (): void => {
+  window.location.href = '/';
+};

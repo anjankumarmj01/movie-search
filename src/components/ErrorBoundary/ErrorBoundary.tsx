@@ -1,12 +1,10 @@
 import { Result, Button } from 'antd';
-import useNavigation from '../../utils/useNavigation';
-import { BACK_HOME } from '../../constants/constants';
+import { RETRY } from '../../constants/constants';
+import { handleRetry } from '../../utils/utils';
 
 const ErrorBoundary = () => {
-  const { handleGoHome } = useNavigation();
-
   const handleClick = () => {
-    handleGoHome();
+    handleRetry();
   };
 
   return (
@@ -16,7 +14,7 @@ const ErrorBoundary = () => {
       subTitle="Something went wrong on the server."
       extra={
         <Button type="primary" onClick={handleClick}>
-          {BACK_HOME}
+          {RETRY}
         </Button>
       }
     />

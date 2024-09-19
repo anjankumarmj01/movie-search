@@ -1,23 +1,18 @@
 import { Layout, Typography, Image } from 'antd';
 import movieSearchLogo from '../../assets/movieSearch.jpg';
-import useNavigation from '../../utils/useNavigation';
-import { LOGO, MOVIE_SEARCH_TITLE } from '../../constants/constants';
-import { useLocation } from 'react-router-dom';
-import { handleRetry } from '../../utils/utils';
+import {
+  ANTD_FALLBACK_IMAGE,
+  LOGO,
+  MOVIE_SEARCH_TITLE,
+} from '../../constants/constants';
+import { handleRefreshApp } from '../../utils/utils';
 
 const { Header } = Layout;
 const { Text } = Typography;
 
 const AppHeader = () => {
-  const { handleGoHome } = useNavigation();
-  const location = useLocation();
-
   const handleClick = () => {
-    if (location.pathname === '/') {
-      handleRetry();
-    } else {
-      handleGoHome();
-    }
+    handleRefreshApp();
   };
 
   return (
@@ -26,8 +21,9 @@ const AppHeader = () => {
         <Image
           src={movieSearchLogo}
           alt={LOGO}
-          style={logoStyle}
+          fallback={ANTD_FALLBACK_IMAGE}
           preview={false}
+          style={logoStyle}
         />
         <Text style={movieSearchTextStyle}>{MOVIE_SEARCH_TITLE}</Text>
       </div>
@@ -36,10 +32,10 @@ const AppHeader = () => {
 };
 
 const headerStyle: React.CSSProperties = {
-  background: '#001529',
   display: 'flex',
   alignItems: 'center',
   padding: '0 20px',
+  justifyContent: 'space-between',
 };
 
 const logoContainerStyle: React.CSSProperties = {
@@ -51,7 +47,7 @@ const logoContainerStyle: React.CSSProperties = {
 const logoStyle: React.CSSProperties = {
   width: '50px',
   height: '50px',
-  marginRight: '20px',
+  marginRight: '10px',
 };
 
 const movieSearchTextStyle: React.CSSProperties = {
