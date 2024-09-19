@@ -1,12 +1,19 @@
+export enum ButtonLabels {
+  VIEW_FAVOURITES = 'View Favourites',
+  BACK_HOME = 'Back Home',
+  GO_BACK = 'Go Back',
+  RETRY = 'Retry',
+}
+
 export const NOT_AVAILABLE = 'Not Available';
 export const NOT_APPLIED = 'N/A';
 
-export const BACK_HOME = 'Back Home';
-export const GO_BACK = 'Go Back';
-export const RETRY = 'Retry';
-
 export const MOVIE_SEARCH_TITLE = 'Movie Search';
 export const FOOTER_TEXT = 'Created by Anjan Kumar M J';
+
+export const INPUT_PLACEHOLDER =
+  'Search by title (enter minimum of 3 characters)';
+export const INPUT_ERROR_TEXT = 'Please enter at least 3 characters to search.';
 
 export const LOGO = 'Logo';
 

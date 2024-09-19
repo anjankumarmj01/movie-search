@@ -7,8 +7,7 @@ import { getDisplayValue, handleGoBack } from '../utils/utils';
 import Shimmer from '../components/Shimmer/Shimmer';
 import {
   ANTD_FALLBACK_IMAGE,
-  BACK_HOME,
-  GO_BACK,
+  ButtonLabels,
   LOGO,
 } from '../constants/constants';
 import useNavigation from '../utils/useNavigation';
@@ -105,9 +104,9 @@ const MovieDetailsPage = () => {
               onClick={handleGoHome}
               style={{ marginRight: '10px' }}
             >
-              {BACK_HOME}
+              {ButtonLabels.BACK_HOME}
             </Button>
-            <Button onClick={handleGoBack}>{GO_BACK}</Button>
+            <Button onClick={handleGoBack}>{ButtonLabels.GO_BACK}</Button>
           </div>
         </>
       )}

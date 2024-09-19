@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSearchMoviesQuery } from '../store/api';
-import { Input, Button, Badge, GetProps } from 'antd';
+import { Input, Button, GetProps, Flex, Space, Typography } from 'antd';
 import { Movie } from '../types/types';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,8 +10,14 @@ import OfflineMessage from '../components/Offline/OfflineMessage';
 import { AppDispatch, RootState } from '../store/store';
 import MovieSearchResultsPage from './MovieSearchResultsPage'; // Import the child component
 import { Link } from 'react-router-dom';
+import {
+  INPUT_ERROR_TEXT,
+  ButtonLabels,
+  INPUT_PLACEHOLDER,
+} from '../constants/constants';
 
 const { Search } = Input;
+const { Text } = Typography;
 
 const SearchPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -77,33 +83,27 @@ const SearchPage = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <Link to={'/favourites'}>
-        <Button type="primary" style={{ float: 'right', marginBottom: 20 }}>
-          View Favourites
-        </Button>
-      </Link>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <Flex justify="space-between" style={{ marginBottom: '10px' }}>
         <Search
-          placeholder="Search by title (enter minimum of 3 characters)"
+          placeholder={INPUT_PLACEHOLDER}
           allowClear
           enterButton
           onSearch={onSearch}
-          style={{ width: 400, marginBottom: 20 }}
+          style={{ width: '100%', maxWidth: '400px' }}
         />
+        <Link to={'/favourites'}>
+          <Button type="primary" aria-label={ButtonLabels.VIEW_FAVOURITES}>
+            {ButtonLabels.VIEW_FAVOURITES}
+          </Button>
+        </Link>
+      </Flex>
+      <Space size="small" style={{ marginBottom: '10px' }}>
         {showError && (
-          <Badge
-            count="Please enter at least 3 characters to search"
-            style={{
-              backgroundColor: '#f5222d',
-              color: '#fff',
-              marginLeft: '10px',
-              borderRadius: '12px',
-              padding: '4px 12px',
-            }}
-          />
+          <Text type="danger" style={{ marginBottom: '5px' }}>
+            {INPUT_ERROR_TEXT}
+          </Text>
         )}
-      </div>
-      {/* Pass necessary props to the child component */}
+      </Space>
       <MovieSearchResultsPage
         isLoading={isLoading}
         error={error}

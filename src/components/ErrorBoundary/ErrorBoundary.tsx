@@ -1,5 +1,5 @@
 import { Result, Button } from 'antd';
-import { RETRY } from '../../constants/constants';
+import { ButtonLabels } from '../../constants/constants';
 import { handleRetry } from '../../utils/utils';
 
 const ErrorBoundary = () => {
@@ -14,7 +14,7 @@ const ErrorBoundary = () => {
       subTitle="Something went wrong on the server."
       extra={
         <Button type="primary" onClick={handleClick}>
-          {RETRY}
+          {ButtonLabels.RETRY}
         </Button>
       }
     />

@@ -22,7 +22,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import useNavigation from '../../utils/useNavigation';
 import {
   ANTD_FALLBACK_IMAGE,
-  BACK_HOME,
+  ButtonLabels,
   LOGO,
 } from '../../constants/constants';
 
@@ -130,7 +130,7 @@ const Favourites = () => {
           }}
         >
           <Button type="primary" onClick={handleClick}>
-            {BACK_HOME}
+            {ButtonLabels.BACK_HOME}
           </Button>
         </div>
       </Content>
