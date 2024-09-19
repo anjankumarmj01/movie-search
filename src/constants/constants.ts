@@ -6,6 +6,7 @@ export const GO_BACK = 'Go Back';
 export const RETRY = 'Retry';
 
 export const MOVIE_SEARCH_TITLE = 'Movie Search';
+export const FOOTER_TEXT = 'Created by Anjan Kumar M J';
 
 export const LOGO = 'Logo';
 

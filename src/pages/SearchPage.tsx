@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSearchMoviesQuery } from '../store/api';
-import { Input, Button, Badge } from 'antd';
+import { Input, Button, Badge, GetProps } from 'antd';
 import { Movie } from '../types/types';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +19,8 @@ const SearchPage = () => {
   const [showError, setShowError] = useState(false); // State for managing error display
   const dispatch = useDispatch<AppDispatch>();
   const onlineStatus = useOnlineStatus();
+
+  type SearchProps = GetProps<typeof Input.Search>;
 
   // Selectors
   const searchTerm = useSelector((state: RootState) => state.search.searchTerm);
@@ -51,7 +53,7 @@ const SearchPage = () => {
   }, [dispatchSearchResults]);
 
   // Handle search term input
-  const handleSearch = (value: string) => {
+  const onSearch: SearchProps['onSearch'] = (value) => {
     if (value.length >= 3) {
       dispatch(setSearchTerm(value));
       setShowError(false);
@@ -84,7 +86,8 @@ const SearchPage = () => {
         <Search
           placeholder="Search by title (enter minimum of 3 characters)"
           allowClear
-          onSearch={handleSearch}
+          enterButton
+          onSearch={onSearch}
           style={{ width: 400, marginBottom: 20 }}
         />
         {showError && (

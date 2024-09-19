@@ -6,7 +6,7 @@ import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 import Favourites from '../components/Favourites/Favourites';
 import { Layout } from 'antd';
 import AppHeader from '../components/Header/AppHeader';
-import '../components/App/AppLayout.css';
+import AppFooter from '../components/Footer/AppFooter';
 
 const { Content } = Layout;
 
@@ -14,11 +14,12 @@ const routes = [
   {
     path: '/',
     element: (
-      <Layout className="app-layout">
+      <Layout>
         <AppHeader />
-        <Content className="app-content">
+        <Content>
           <Outlet />
         </Content>
+        <AppFooter />
       </Layout>
     ),
     errorElement: <ErrorBoundary />,
