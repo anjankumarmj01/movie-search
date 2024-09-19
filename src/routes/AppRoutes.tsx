@@ -6,7 +6,7 @@ import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 import Favourites from '../components/Favourites/Favourites';
 import { Layout } from 'antd';
 import AppHeader from '../components/Header/AppHeader';
-import AppFooter from '../components/Footer/AppFooter';
+// import AppFooter from '../components/Footer/AppFooter';
 
 const { Content } = Layout;
 
@@ -19,7 +19,7 @@ const routes = [
         <Content>
           <Outlet />
         </Content>
-        <AppFooter />
+        {/* <AppFooter /> */}
       </Layout>
     ),
     errorElement: <ErrorBoundary />,
